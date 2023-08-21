@@ -51,7 +51,7 @@ const config: QuartzConfig = {
       Plugin.SyntaxHighlighting(),
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false, wikilinks: true }),
       Plugin.GitHubFlavoredMarkdown(),
-
+      Plugin.CrawlLinks({ markdownLinkResolution: "absolute"}),
       Plugin.Latex({ renderEngine: "katex" }),
       Plugin.Description(),
     ],
