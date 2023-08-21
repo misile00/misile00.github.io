@@ -138,7 +138,7 @@ There are several blog posts explaining how to escape the sandbox using old vuln
 
 ### Using web browsers in Flatpak
 
-Flatpak is a great technology that allows you to install applications on Linux distributions regardless of the package system. However, using web browsers with Flatpak creates a security risk. This is because Flatpak creates a sandbox environment (using [[Bubblewrap]]) and does not allow opening another sandbox inside this sandbox (user-namespaces). The two browsers discussed above (Firefox and Chromium) use user-namespaces sandbox and have a security issue when they cannot open user-namespaces sandbox.
+Flatpak is a great technology that allows you to install applications on Linux distributions regardless of the package system. However, using web browsers with Flatpak creates a security risk. This is because Flatpak creates a sandbox environment (using [[notes/Bubblewrap | Bubblewrap]]) and does not allow opening another sandbox inside this sandbox (user-namespaces). The two browsers discussed above (Firefox and Chromium) use user-namespaces sandbox and have a security issue when they cannot open user-namespaces sandbox.
 
 To explain it further, Flatpak replaces its own user-namespaces sandbox for Chromium-based browsers instead of Chromium's sandbox. A similar situation applies to Firefox. Although there is no direct replacement situation for Firefox, Firefox inside Flatpak cannot create its own user-namespaces sandbox, and Flatpak already has a sandbox environment. As a result, we still have to rely on Flatpak's own sandbox.
 
