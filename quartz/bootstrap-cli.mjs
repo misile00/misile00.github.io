@@ -219,7 +219,7 @@ See the [documentation](https://quartz.jzhao.xyz) for how to get started.
       )
     }
 
-    // get a prefered link resolution strategy
+    // get a preferred link resolution strategy
     const linkResolutionStrategy = exitIfCancel(
       await select({
         message: `Choose how Quartz should resolve links in your content. You can change this later in \`quartz.config.ts\`.`,
@@ -394,13 +394,21 @@ See the [documentation](https://quartz.jzhao.xyz) for how to get started.
 
     const buildMutex = new Mutex()
     const timeoutIds = new Set()
+    let cleanupBuild = null
     const build = async (clientRefresh) => {
-      await buildMutex.acquire()
+      const release = await buildMutex.acquire()
+
+      if (cleanupBuild) {
+        await cleanupBuild()
+        console.log(chalk.yellow("Detected a source code change, doing a hard rebuild..."))
+      }
+
       const result = await ctx.rebuild().catch((err) => {
         console.error(`${chalk.red("Couldn't parse Quartz configuration:")} ${fp}`)
         console.log(`Reason: ${chalk.grey(err)}`)
         process.exit(1)
       })
+      release()
 
       if (argv.bundleInfo) {
         const outputFileName = "quartz/.quartz-cache/transpiled-build.mjs"
@@ -416,9 +424,8 @@ See the [documentation](https://quartz.jzhao.xyz) for how to get started.
       // bypass module cache
       // https://github.com/nodejs/modules/issues/307
       const { default: buildQuartz } = await import(cacheFile + `?update=${randomUUID()}`)
-      await buildQuartz(argv, clientRefresh)
+      cleanupBuild = await buildQuartz(argv, buildMutex, clientRefresh)
       clientRefresh()
-      buildMutex.release()
     }
 
     const rebuild = (clientRefresh) => {
@@ -455,6 +462,12 @@ See the [documentation](https://quartz.jzhao.xyz) for how to get started.
           await serveHandler(req, res, {
             public: argv.output,
             directoryListing: false,
+            headers: [
+              {
+                source: "**/*.html",
+                headers: [{ key: "Content-Disposition", value: "inline" }],
+              },
+            ],
           })
           const status = res.statusCode
           const statusString =
@@ -526,7 +539,6 @@ See the [documentation](https://quartz.jzhao.xyz) for how to get started.
           ignoreInitial: true,
         })
         .on("all", async () => {
-          console.log(chalk.yellow("Detected a source code change, doing a hard rebuild..."))
           rebuild(clientRefresh)
         })
     } else {
