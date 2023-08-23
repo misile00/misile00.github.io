@@ -2,7 +2,7 @@
 title: "My Network Configurations"
 tags:
 - linux
-- computer networking
+- networking
 weight: -1
 date created: 2023-01-21 16.30
 date updated: 2023-01-21 17.39

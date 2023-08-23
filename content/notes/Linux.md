@@ -1,5 +1,5 @@
 ---
-title: Linux Systems
+title: Linux
 date created: 2023-01-21 16.30
 ---
 
