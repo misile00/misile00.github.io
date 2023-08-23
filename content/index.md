@@ -8,15 +8,15 @@ Hi, I'm Asım. I am interested in Linux, Cyber Security and Libre software. I lo
 
 ### Some of My Notes
 
-* [[notes/Firefox Hardening | Firefox Hardening]]
+* [[notes/Firefox Hardening]]
 
-* [[notes/Bubblewrap | Bubblewrap]]
+* [[notes/Bubblewrap]]
 
-* [[notes/Browser Sandboxing | Browser Sandboxing]]
+* [[notes/Browser Sandboxing]]
 
-* [[notes/PGO | PGO]]
+* [[notes/PGO]]
  
-* [[notes/My Network Configurations | My Network Configurations]]
+* [[notes/My Network Configurations]]
 
 ### Links
 
@@ -25,5 +25,4 @@ To see all my notes:
 
 My GitHub account:
 [github.com/misile00](https://github.com/misile00)
-
 

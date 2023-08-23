@@ -12,7 +12,7 @@ What is hardening? In real Firefox' world, **"hardening"** is just a synonym of 
 
 So, why are you doing this for Firefox, not for Chrome/Chromium? Because many browsers use Chromium engine, which lead to monopolization. I don't want to support this. In addition, with the configuration facilities Firefox offers to the user, it is much easier to increase privacy and anonymity. For these reasons, I prepared this document about Firefox.
 
-![[images/firefox_hardening/firefox_fights_for_you.png]]
+![[notes/images/firefox_hardening/firefox_fights_for_you.png]]
 
 
 ### About document
@@ -33,38 +33,38 @@ I felt the need to divide this document to 4 groups: Level 1, Level 2, Level 3 a
 ### Level 1
 
 *Settings > Home > Browsing*
-![[images/firefox_hardening/browsing.png]]
+![[notes/images/firefox_hardening/browsing.png]]
 Disable this two options.
 
 *Settings > Home > Network > Setttings*
-![[images/firefox_hardening/network.png]]
-![[images/firefox_hardening/DoH.png]]Enable DNS over HTTPS.  Here you can select the DNS provider you want. I prefer Cloudflare for Families' Blocked Malware option. It is up to you whether or not to choose the DNS servers of a non -profit organization like Quad9.
+![[notes/images/firefox_hardening/network.png]]
+![[notes/images/firefox_hardening/DoH.png]]Enable DNS over HTTPS.  Here you can select the DNS provider you want. I prefer Cloudflare for Families' Blocked Malware option. It is up to you whether or not to choose the DNS servers of a non -profit organization like Quad9.
 
 *Settings > Home > Firefox Home Content*
-![[images/firefox_hardening/newtab.png]]
+![[notes/images/firefox_hardening/newtab.png]]
 Disable this two option. 
 
 *Settings > Search > Default Search Engine*
-![[images/firefox_hardening/search-engine.png]]
+![[notes/images/firefox_hardening/search-engine.png]]
 Here you can select any privacy-oriented search engine. Since the default options were DuckDuckGo, I chose it. If you want, you can add and choose a much more privacy-oriented service like SearX/SearXNG.
 
 *Settings > Search > Search Suggestion*
-![[images/firefox_hardening/suggestions.png]]
+![[notes/images/firefox_hardening/suggestions.png]]
 Disable this option.
 
 *Settings > Privacy & Security > Browser Privacy*
-![[images/firefox_hardening/ETP.png]]
+![[notes/images/firefox_hardening/ETP.png]]
 Set this setting like that. Most websites don't have problems with this setting, but you can turn off Enhanced Tracking Protection for broken website.
 
-![[images/firefox_hardening/ETP_off.png]]
+![[notes/images/firefox_hardening/ETP_off.png]]
 For turning off Enhanced Tracker Protection, click the shield icon to the left of the URL bar. And toggle the switch.
 
 *Settings > Privacy & Security > Firefox Data Collection and Use*
-![[images/firefox_hardening/telemetry.png]]
+![[notes/images/firefox_hardening/telemetry.png]]
 Disable the telemetry.
 
 *Settings > Privacy & Security > HTTPS-Only Mode*
-![[images/firefox_hardening/https_only.png]]
+![[notes/images/firefox_hardening/https_only.png]]
 Select this option to enable HTTPS-Only Mode.
 
 
@@ -141,7 +141,7 @@ Set these options as follows:
 ### Level 3
 
 *Settings > Privacy & Security > Cookies and Site Data*
-![[images/firefox_hardening/delete_all_cookies.png]]
+![[notes/images/firefox_hardening/delete_all_cookies.png]]
 Activate this option. This option is a good thing for privacy and security but this option also means that you log out from your accounts when Firefox is closed. You can add expections for sites. Cookies and data on these sites are not deleted.
 
 #### Various
@@ -220,7 +220,7 @@ Download the `user.js` file from [the repository](https://github.com/arkenfox/us
 
 Open Firefox and go to `about:profiles`
 
-![[images/firefox_hardening/profiles.png]]
+![[notes/images/firefox_hardening/profiles.png]]
 
 Click this button and open profile directory.
 

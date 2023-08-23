@@ -38,12 +38,12 @@ With the elevated privileges, SUID sandbox uses various techniques such as chroo
 
 If we prevent privilege escalation, SUID sandbox will not work. For example, we can force Chromium to use SUID sandbox by giving `--disable-namespace-sandbox` parameter. This way, we can see how it will react in a sandbox like the one shown in the picture below.
 
-![[images/browser_sandboxing/chromium-suid-bubblewrap.png]]
+![[notes/images/browser_sandboxing/chromium-suid-bubblewrap.png]]
 *Running Thorium Browser (optimized Chromium) inside a sandbox that does not allow elevated privileges. I am using the tool that I explained how to use in [this document](https://misile00.github.io/notes/Bubblewrap) to create a sandbox.*
 
 Chromium prefers to use the user-namespaces feature in the kernel instead of SUID bits (if it is available), due to several reasons, including the fact that having a setuid binary is more risky against privilege escalation attacks. These reasons, including others, are explained [here](https://bugs.chromium.org/p/chromium/issues/detail?id=312380).
 
-![[images/browser_sandboxing/chromium-suid-sandbox.png]]
+![[notes/images/browser_sandboxing/chromium-suid-sandbox.png]]
 *Chromium using SUID sandbox.*
 
 **Note:** Firefox does not use SUID sandbox. If user-namespaces are not available, Firefox only uses seccomp-bpf. This means that the sandbox will provide less protection as a part of it will be unusable.
@@ -57,9 +57,9 @@ backported. In addition, some distributions may choose not to use this feature i
 Therefore, browsers have alternative sandboxing solutions. The SUID sandbox in Chromium is an
 example of this.
 
-![[images/browser_sandboxing/chromium-user-namespaces-sandbox.png]]*Chriomium using user-namespaces sandbox. user-namespace sandbox is default in Chromium. If your kernel supports the user-namespace feature, it is preferred over SUID sandbox mode.*
+![[notes/images/browser_sandboxing/chromium-user-namespaces-sandbox.png]]*Chriomium using user-namespaces sandbox. user-namespace sandbox is default in Chromium. If your kernel supports the user-namespace feature, it is preferred over SUID sandbox mode.*
 
-![[images/browser_sandboxing/firefox-user-namespaces-sandbox.png]]
+![[notes/images/browser_sandboxing/firefox-user-namespaces-sandbox.png]]
 *Firefox using user-namespaces sandbox. If your kernel supports the user-namespace feature, it's activated as an additional protection layer.*
 
 
@@ -75,8 +75,8 @@ With seccomp-bpf, programs can define a list of allowed system calls, and everyt
 
 This is a feature since Linux kernel 3.5 and is used in both of Firefox and Chromium. 
 
-![[images/browser_sandboxing/firefox-seccomp_bpf.png]]
-![[images/browser_sandboxing/chromium-seccomp_bpf.png]]
+![[notes/images/browser_sandboxing/firefox-seccomp_bpf.png]]
+![[notes/images/browser_sandboxing/chromium-seccomp_bpf.png]]
 *Firefox and Chromium using seccomp-bpf*
 
 
@@ -86,13 +86,13 @@ This step of browser protection separates web content into different parts, so t
 
 Firefox and Chromium use a way of doing this called multi-process architecture. Firefox has a project called "Electrolysis" or "e10s" that separates the browser parts. Chromium separates every tab and add-on into different parts, and this is called the "Chromium process model"
 
-![[images/browser_sandboxing/firefox-multi-processes.png]]
+![[notes/images/browser_sandboxing/firefox-multi-processes.png]]
 
 As you can see in the image above, in Firefox's new sandboxing architecture (Fission), each website is divided into separate processes. This architecture is similar in Chromium as well.
 
 Additionally, with this step, the main browser process is separated from the content processes.
 
-![[images/browser_sandboxing/parent-child-processes.png]]
+![[notes/images/browser_sandboxing/parent-child-processes.png]]
 
 When web content is run in separate processes, it means that if there is a security issue, attackers won't be able to take control of the entire browser. Also, if there is a problem with one tab, it won't crash the whole browser.
 
@@ -108,10 +108,10 @@ IPC allows different processes to communicate with each other, and it's commonly
 Similarly, in Firefox's Electrolysis project, the browser UI process communicates with the content process using IPC mechanisms. This allows Firefox to enforce security policies and prevent any malicious activity from affecting the user's system.
 
 
-![[images/browser_sandboxing/ipc-overview-firefox.png]]
+![[notes/images/browser_sandboxing/ipc-overview-firefox.png]]
 *An overview of the IPC mechanism in Firefox. Firefox uses IPDL, Shared Memory, JSActors and Message Manager in the IPC layer.*
 
-![[images/browser_sandboxing/chromium-ipc.png]]
+![[notes/images/browser_sandboxing/chromium-ipc.png]]
 *An overview of the IPC mechanism in Chromium. Chromium uses [Mojo](https://chromium.googlesource.com/chromium/src.git/+/master/mojo/README.md) for IPC. Mojo is a modern, asynchronous, message-passing framework. Mojo messages can be sent over a variety of transport mechanisms, including shared memory, pipes, and sockets.*
 
 
@@ -119,7 +119,7 @@ Similarly, in Firefox's Electrolysis project, the browser UI process communicate
 
 I will not specifically address any vulnerability related to escaping from the sandbox here. What I want to point out is that if we want to escape from the sandbox, we need to target which parts of the mechanism and try to find vulnerabilities.
 
-![[images/browser_sandboxing/chromium-mojo-ipc.png]]
+![[notes/images/browser_sandboxing/chromium-mojo-ipc.png]]
 
 To better understand the potential attack points, let's use the image above. As you can see, the image is prepared for Chromium, but if we ignore that the name of the IPC layer in the picture is Mojo, there will be no significant difference between Firefox and Chromium in general.
 
@@ -138,12 +138,12 @@ There are several blog posts explaining how to escape the sandbox using old vuln
 
 ### Using web browsers in Flatpak
 
-Flatpak is a great technology that allows you to install applications on Linux distributions regardless of the package system. However, using web browsers with Flatpak creates a security risk. This is because Flatpak creates a sandbox environment (using [[notes/Bubblewrap | Bubblewrap]]) and does not allow opening another sandbox inside this sandbox (user-namespaces). The two browsers discussed above (Firefox and Chromium) use user-namespaces sandbox and have a security issue when they cannot open user-namespaces sandbox.
+Flatpak is a great technology that allows you to install applications on Linux distributions regardless of the package system. However, using web browsers with Flatpak creates a security risk. This is because Flatpak creates a sandbox environment (using [[notes/Bubblewrap]]) and does not allow opening another sandbox inside this sandbox (user-namespaces). The two browsers discussed above (Firefox and Chromium) use user-namespaces sandbox and have a security issue when they cannot open user-namespaces sandbox.
 
 To explain it further, Flatpak replaces its own user-namespaces sandbox for Chromium-based browsers instead of Chromium's sandbox. A similar situation applies to Firefox. Although there is no direct replacement situation for Firefox, Firefox inside Flatpak cannot create its own user-namespaces sandbox, and Flatpak already has a sandbox environment. As a result, we still have to rely on Flatpak's own sandbox.
 
-![[images/browser_sandboxing/chromium-flatpak.png]]
-![[images/browser_sandboxing/firefox-flatpak.png]]
+![[notes/images/browser_sandboxing/chromium-flatpak.png]]
+![[notes/images/browser_sandboxing/firefox-flatpak.png]]
 
 Screenshots from Firefox and Chromium. As you can see, Flatpak does not allow the browsers to use their own sandbox mechanism, and you are forced to use Flatpak's sandbox mechanism provided by bubblewrap.
 

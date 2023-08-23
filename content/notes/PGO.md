@@ -111,11 +111,11 @@ You can repeat these steps to increase performance further.
 
 There are some benchmarks. Taken from Phoronix.
 
-![[images/pgo/yquake-pgo.png]]
+![[notes/images/pgo/yquake-pgo.png]]
 
-![[images/pgo/sci-mark-pgo.png]]
+![[notes/images/pgo/sci-mark-pgo.png]]
 
-![[images/pgo/botan-pgo.png]]
+![[notes/images/pgo/botan-pgo.png]]
 
 [Here](https://www.phoronix.com/news/GCC-12-PGO-TR-3990X-AMD) you can find more benchmark results.
 

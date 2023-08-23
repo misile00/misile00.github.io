@@ -76,7 +76,7 @@ bwrap --unshare-net "$@"
 
 And finally, we have ``--unshare-all`` parameter. This parameter stops the sharing of all features specified at `bwrap`(1) man page.
 
-![[images/bubblewrap/unshare.png]]
+![[notes/images/bubblewrap/unshare.png]]
 
 Now, we can start preparing the script.
 
