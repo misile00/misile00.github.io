@@ -39,7 +39,7 @@ With the elevated privileges, SUID sandbox uses various techniques such as chroo
 If we prevent privilege escalation, SUID sandbox will not work. For example, we can force Chromium to use SUID sandbox by giving `--disable-namespace-sandbox` parameter. This way, we can see how it will react in a sandbox like the one shown in the picture below.
 
 ![[notes/images/browser_sandboxing/chromium-suid-bubblewrap.png]]
-*Running Thorium Browser (optimized Chromium) inside a sandbox that does not allow elevated privileges. I am using the tool that I explained how to use in [this document](https://misile00.github.io/notes/Bubblewrap) to create a sandbox.*
+*Running Thorium Browser (optimized Chromium) inside a sandbox that does not allow elevated privileges. I am using the tool that I explained how to use in [this document](https://misile00.github.io/posts/Bubblewrap) to create a sandbox.*
 
 Chromium prefers to use the user-namespaces feature in the kernel instead of SUID bits (if it is available), due to several reasons, including the fact that having a setuid binary is more risky against privilege escalation attacks. These reasons, including others, are explained [here](https://bugs.chromium.org/p/chromium/issues/detail?id=312380).
 
@@ -138,7 +138,7 @@ There are several blog posts explaining how to escape the sandbox using old vuln
 
 ### Using web browsers in Flatpak
 
-Flatpak is a great technology that allows you to install applications on Linux distributions regardless of the package system. However, using web browsers with Flatpak creates a security risk. This is because Flatpak creates a sandbox environment (using [[notes/Bubblewrap]]) and does not allow opening another sandbox inside this sandbox (user-namespaces). The two browsers discussed above (Firefox and Chromium) use user-namespaces sandbox and have a security issue when they cannot open user-namespaces sandbox.
+Flatpak is a great technology that allows you to install applications on Linux distributions regardless of the package system. However, using web browsers with Flatpak creates a security risk. This is because Flatpak creates a sandbox environment (using [[posts/Bubblewrap]]) and does not allow opening another sandbox inside this sandbox (user-namespaces). The two browsers discussed above (Firefox and Chromium) use user-namespaces sandbox and have a security issue when they cannot open user-namespaces sandbox.
 
 To explain it further, Flatpak replaces its own user-namespaces sandbox for Chromium-based browsers instead of Chromium's sandbox. A similar situation applies to Firefox. Although there is no direct replacement situation for Firefox, Firefox inside Flatpak cannot create its own user-namespaces sandbox, and Flatpak already has a sandbox environment. As a result, we still have to rely on Flatpak's own sandbox.
 

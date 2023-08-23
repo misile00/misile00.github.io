@@ -6,7 +6,7 @@ enableToc: false
 
 Hi, I'm Asım. I am interested in Linux, Cyber Security and Libre software. I love learning new things on these topics. I like to go deep into the computer systems. In general, my knowledge is on Linux system administration but I am also trying to learn new things about new technologies such as virtualization or cloud.
 
-### Some of My Notes
+### Some of My Writings
 
 * [[notes/Firefox Hardening]]
 
@@ -15,12 +15,12 @@ Hi, I'm Asım. I am interested in Linux, Cyber Security and Libre software. I lo
 * [[notes/Browser Sandboxing]]
 
 * [[notes/PGO]]
- 
+
 * [[notes/My Network Configurations]]
 
 ### Links
 
-To see all my notes:
+To see everything I've written:
 [misile00.github.io/notes/](https://misile00.github.io/notes/)
 
 My GitHub account:
