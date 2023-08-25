@@ -11,6 +11,7 @@ const config: QuartzConfig = {
     },
     baseUrl: "misile00.github.io",
     ignorePatterns: ["private", "templates"],
+    defaultDateType: "created",
     theme: {
       typography: {
         header: "Schibsted Grotesk",
