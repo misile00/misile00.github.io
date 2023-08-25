@@ -32,6 +32,20 @@ export default (() => {
         {js
           .filter((resource) => resource.loadTime === "beforeDOMReady")
           .map((res) => JSResourceToScriptElement(res, true))}
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-0FDT2WHTQ7"
+        ></script>
+        <script>
+            {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-0FDT2WHTQ7');
+        `   }
+        </script>
       </head>
     )
   }
