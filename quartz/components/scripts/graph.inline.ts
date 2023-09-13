@@ -47,11 +47,12 @@ async function renderGraph(container: string, fullSlug: FullSlug) {
   const data = await fetchData
 
   const links: LinkData[] = []
+  const validLinks = new Set(Object.keys(data).map((slug) => simplifySlug(slug as FullSlug)))
   for (const [src, details] of Object.entries<ContentDetails>(data)) {
     const source = simplifySlug(src as FullSlug)
     const outgoing = details.links ?? []
     for (const dest of outgoing) {
-      if (dest in data) {
+      if (validLinks.has(dest)) {
         links.push({ source, target: dest })
       }
     }
@@ -231,7 +232,9 @@ async function renderGraph(container: string, fullSlug: FullSlug) {
     .attr("dy", (d) => -nodeRadius(d) + "px")
     .attr("text-anchor", "middle")
     .text(
-      (d) => data[d.id]?.title || (d.id.charAt(1).toUpperCase() + d.id.slice(2)).replace("-", " "),
+      (d) =>
+        data[d.id]?.title ||
+        (d.id.charAt(0).toUpperCase() + d.id.slice(1, d.id.length - 1)).replace("-", " "),
     )
     .style("opacity", (opacityScale - 1) / 3.75)
     .style("pointer-events", "none")
