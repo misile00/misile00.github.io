@@ -11,7 +11,7 @@ When data is first created or duplicated, CoW doesn't immediately make a complet
 
 In this example, it demonstrates the use of CoW in virtual memory management. However, CoW is employed in many places, including file systems, as well as within applications and libraries themselves.
 
-For instance, when discussing file systems specifically, Btrfs and ZFS use CoW to maintain the integrity of the file system under unexpected conditions without traditional [[notes/journaling]]. Additionally, this approach provides a valuable feature called "snapshots" which is highly beneficial for data backup, versioning, and recovery purposes.
+For instance, when discussing file systems specifically, Btrfs and ZFS use CoW to maintain the integrity of the file system under unexpected conditions without traditional [[notes/Journaling]]. Additionally, this approach provides a valuable feature called "snapshots" which is highly beneficial for data backup, versioning, and recovery purposes.
 
 Additionally, file systems using CoW are a good choice for SSDs because they help prevent unnecessary I/O in file operations. And, in general, thanks to CoW, deduplication (with userspace tools) is quite straightforward, making it possible to save storage space.
 
