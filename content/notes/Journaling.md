@@ -1,6 +1,8 @@
 ---
 title: Journaling
 date created: 2023-10-14 20.35
+tags:
+  - linux
 ---
 Journaling is a feature used by many modern file systems to improve data integrity and recovery in case of system crashes or unexpected power outages. It maintains a record of changes made to the file system, making it easier to recover from failures without extensive file system checks.
 

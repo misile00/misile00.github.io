@@ -1,6 +1,8 @@
 ---
-title: Journaling
+title: Copy-on-Write
 date created: 2023-10-15 11.40
+tags:
+  - linux
 ---
 Copy-on-Write (CoW) is a data management technique used in computer systems and file systems. It is designed to optimize the way data is copied and modified, particularly in scenarios where multiple processes or users access the same data.
 

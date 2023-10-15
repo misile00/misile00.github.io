@@ -1,6 +1,8 @@
 ---
 title: Log-structured file system
 date created: 2023-10-15 16.50
+tags:
+  - linux
 ---
 Log-structured file systems (LFS) are a type of file system used in some operating systems, particularly in the context of SSDs and flash storage. They are designed for improved performance and longevity of these storage devices.
 
