@@ -1,8 +1,7 @@
 ---
-title: "What is browser sandboxing? How to escape the sandbox?"
+title: What is browser sandboxing? How to escape the sandbox?
 tags:
-- cyber security
-weight: -5
+  - cybersecurity
 date created: 2023-02-05 07:41
 ---
 

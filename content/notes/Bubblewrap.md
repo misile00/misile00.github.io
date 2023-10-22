@@ -1,10 +1,9 @@
 ---
-title: "What is Bubblewrap? How to use it?"
+title: What is Bubblewrap? How to use it?
 tags:
-- cyber security
-- linux
-- FOSS
-weight: -4
+  - cybersecurity
+  - linux
+  - FOSS
 date created: 2023-01-25 18:26
 ---
 
